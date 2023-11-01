@@ -16,13 +16,29 @@ def encoder(old):
                 new += '2'
     print('Your password has been encoded and stored!')
     print('')
+    return new
 
-
+def decoder(password):
+    final = ""
+    for i in password:
+        i = int(i)
+        if i >= 3:
+            i = i - 3
+            final = final + str(i)
+        elif i < 3:
+            if i == 2:
+                final = final + '9'
+            elif i == 1:
+                final = final + '8'
+            elif i == 0:
+                final = final + '7'
+    return final
 
 
 
 
 def main():
+    ps = 0
     while True:
          print('Menu')
          print('-------------')
@@ -35,9 +51,17 @@ def main():
          if choice ==1:
              password = (input('Please enter your password to encode: '))
              if len(password) == 8:
-                 encoder(int(password))
+                 password = encoder(int(password))
+                 ps = ps + 1
              else:
                  print('Sorry, password must be an 8-digit integer number.')
+         if choice ==2:
+             if ps >= 1:
+                 decoded = decoder(password)
+                 print("The encoded password is " + password + ", and the original password is " + decoded + ".")
+
+             else:
+                 print('Sorry, no password stored')
          elif choice == 3:
              quit()
 
